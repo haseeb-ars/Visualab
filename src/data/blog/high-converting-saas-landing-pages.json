@@ -1,0 +1,15 @@
+{
+  "slug": "high-converting-saas-landing-pages",
+  "title": "The Psychology of High-Converting SaaS Landing Pages",
+  "excerpt": "A conversion layout needs more than visual widgets. We dissect user scrolling flows, geometric hotspots, and dynamic pricing modal triggers.",
+  "category": "design",
+  "categoryDisplay": "Web Design",
+  "date": "May 15, 2026",
+  "readTime": "5 min read",
+  "color": "border-brand-blue/20 bg-brand-blue/5",
+  "author": "Clara Croft",
+  "role": "UX/UI Design Director",
+  "intro": "Dissecting how conversion structures, dark theme typography, and smooth micro-interactions capture visitor attention and drive qualified operations assessment submissions.",
+  "toc": ["Visual Layout Hotspots", "Micro-Interactions Tuning", "Interactive CTAs"],
+  "contentHtml": "<p>High-performance web design is a balance of aesthetics and conversion principles. When visitors land on your SaaS app, you have less than 3 seconds to establish credibility and capture interest.</p><h2 id=\"visual-layout-hotspots\" class=\"text-lg font-bold text-white mt-4\">1. Visual Layout Hotspots</h2><p>Place your main CTA within the primary scanning hotspot (F-shaped reading pattern). Ensure your hero headline clearly articulates the core problem solved.</p><h2 id=\"micro-interactions-tuning\" class=\"text-lg font-bold text-white mt-4\">2. Micro-Interactions Tuning</h2><p>Subtle cursor tracking glows, card flips on hover, and smooth slide transitions make the site feel responsive and premium, increasing time-on-page metrics.</p><h2 id=\"interactive-ctas\" class=\"text-lg font-bold text-white mt-4\">3. Interactive CTAs</h2><p>Generic 'Contact Us' buttons yield low click rates. Replaced them with interactive lead assessment tools like calculators or operations scorecards to incentivize user engagement.</p>"
+}

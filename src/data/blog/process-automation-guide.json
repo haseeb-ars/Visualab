@@ -1,0 +1,15 @@
+{
+  "slug": "process-automation-guide",
+  "title": "The 2026 Guide to Business Process Automation",
+  "excerpt": "Repetitive data entry and chaotic sorting schedules cost scaling agencies thousands monthly. Here is how to map and execute automatic LLM pipelines.",
+  "category": "ai",
+  "categoryDisplay": "AI Automation",
+  "date": "Jun 10, 2026",
+  "readTime": "6 min read",
+  "color": "border-brand-amber/20 bg-brand-amber/5",
+  "author": "Arthur Pendelton",
+  "role": "Founder & Head of AI",
+  "intro": "Learn how to map operational bottlenecks, isolate repetitive data entry loops, and deploy agentic LLM models to scale operations without hiring overhead.",
+  "toc": ["Operational Auditing", "Trigger-Action Architecture", "Deploying Custom LLMs"],
+  "contentHtml": "<p>Operational overhead is the silent killer of scaling businesses. In our audits, we find that the average administrative employee spends up to 15 hours a week manually moving data between spreadsheets, sorting customer emails, or resolving booking conflicts.</p><h2 id=\"operational-auditing\" class=\"text-lg font-bold text-white mt-4\">1. Operational Auditing</h2><p>Before writing a single line of script, you must construct a bottleneck heat map. Look for tasks that are:</p><ul class=\"list-disc pl-5 flex flex-col gap-1 text-zinc-400\"><li>Highly repetitive (e.g. processing invoice data)</li><li>Logic-simple (can be defined by clear IF/THEN flows)</li><li>High volume (happening multiple times daily)</li></ul><h2 id=\"trigger-action-architecture\" class=\"text-lg font-bold text-white mt-4\">2. Trigger-Action Architecture</h2><p>Modern automations rely on webhooks. When an invoice enters your email box, it triggers a parser webhook. The parser extracts metadata using OCR and posts it directly to your warehouse database.</p><div class=\"p-4 rounded-xl bg-zinc-950 border border-white/5 font-mono text-[12px] text-emerald-400 flex flex-col gap-1 mt-3\"><span class=\"text-zinc-500 flex items-center gap-1.5 mb-2\">Node.js Webhook Handler</span><span>app.post('/api/invoice-hook', async (req, res) => {</span><span>  const { fileUrl } = req.body;</span><span>  const invoiceData = await parseInvoiceWithLLM(fileUrl);</span><span>  await saveToDatabase(invoiceData);</span><span>  return res.status(200).json({ success: true });</span><span>});</span></div><h2 id=\"deploying-custom-llms\" class=\"text-lg font-bold text-white mt-4\">3. Deploying Custom LLMs</h2><p>By training models on custom company knowledge bases, LLMs can respond to complex user queries, draft email replies, and categorize tickets with 95% accuracy, leaving only extreme exceptions for your human team.</p>"
+}

@@ -1,0 +1,42 @@
+name: Daily AI Blogger
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs at 00:00 UTC every day
+  workflow_dispatch: # Allows manual trigger from the Actions tab in GitHub
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate Daily Blog
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node scripts/generate-blog.js
+
+      - name: Commit and Push new post
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # Stage the generated blog posts directory
+          git add src/data/blog/
+          
+          # Commit and push if there are changes
+          if git diff-index --quiet HEAD; then
+            echo "No new blog generated today (or no changes detected)."
+          else
+            git commit -m "chore: automatically generate daily AI blog post [skip ci]"
+            git push
+          fi

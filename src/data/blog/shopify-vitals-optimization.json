@@ -1,0 +1,15 @@
+{
+  "slug": "shopify-vitals-optimization",
+  "title": "How to Optimize Shopify Core Web Vitals under 1.2s",
+  "excerpt": "Every 100ms lag in checkout loading increases cart drop-off rates by 7%. We audit theme scripts, compiled CSS compilation, and media compressions.",
+  "category": "shopify",
+  "categoryDisplay": "Shopify Dev",
+  "date": "May 28, 2026",
+  "readTime": "8 min read",
+  "color": "border-emerald-500/20 bg-emerald-500/5",
+  "author": "Marcus Vance",
+  "role": "Lead Shopify Developer",
+  "intro": "A step-by-step technical guide to removing theme script bloats, structuring asynchronous stylesheet assets, and accelerating e-commerce checkout paths.",
+  "toc": ["Identifying Bloat Scripts", "Media Compression Pipelines", "Checkout API Tuning"],
+  "contentHtml": "<p>Google's ranking algorithms prioritize Core Web Vitals. For Shopify stores doing 7-8 figures, a 1-second delay in page load time translates to an average 7% reduction in conversion rates.</p><h2 id=\"identifying-bloat-scripts\" class=\"text-lg font-bold text-white mt-4\">1. Identifying Bloat Scripts</h2><p>Many Shopify themes are loaded with abandoned apps. These apps leave legacy tracking scripts running in the header, blocking the main execution thread. Always clean up your theme.liquid layout files.</p><div class=\"p-4 rounded-xl bg-zinc-950 border border-white/5 font-mono text-[12px] text-emerald-400 flex flex-col gap-1 mt-3\"><span class=\"text-zinc-500 flex items-center gap-1.5 mb-2\">Delayed Script Scripting</span><span>window.addEventListener('DOMContentLoaded', () => {</span><span>  setTimeout(() => {</span><span>    loadNonCriticalTrackingScripts();</span><span>  }, 2500);</span><span>});</span></div><h2 id=\"media-compression-pipelines\" class=\"text-lg font-bold text-white mt-4\">2. Media Compression Pipelines</h2><p>Never upload raw PNG images. Always utilize Shopify's image filters to output WebP formats, and compress banners below 150KB to preserve mobile rendering bandwidth.</p><h2 id=\"checkout-api-tuning\" class=\"text-lg font-bold text-white mt-4\">3. Checkout API Tuning</h2><p>Reduce AJAX cart calls. Use one-click checkout scripts and keep product upsell configurations lightweight to guarantee sub-second payments.</p>"
+}
