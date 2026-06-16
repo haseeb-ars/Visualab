@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { 
   Sparkles, 
   Send, 
@@ -68,10 +69,16 @@ export default function Footer() {
           
           {/* Brand & Newsletter Column */}
           <div className="lg:col-span-2 flex flex-col gap-6">
-            <Link href="/" className="flex items-center gap-2 group w-fit">
-              <span className="text-lg font-black tracking-widest text-white transition-colors group-hover:text-zinc-300">
-                VISUALAB
-              </span>
+            <Link href="/" className="flex items-center group w-fit">
+              <Image
+                src="/logo.png"
+                alt="VisuaLab"
+                width={350}
+                height={90}
+                className="h-8 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+                style={{ filter: "brightness(0) invert(1)" }}
+                priority
+              />
             </Link>
             
             <p className="text-[14px] text-zinc-400 max-w-sm font-normal leading-relaxed">

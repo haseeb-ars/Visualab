@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useApp } from "@/context/AppContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -102,10 +103,16 @@ export default function Header() {
       <div className="mx-auto flex max-w-7xl h-20 items-center justify-between px-6 sm:px-8">
         
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <span className="text-xl font-black tracking-widest text-white transition-colors group-hover:text-zinc-300">
-            VISUALAB
-          </span>
+        <Link href="/" className="flex items-center group">
+          <Image
+            src="/logo.png"
+            alt="VisuaLab"
+            width={350}
+            height={90}
+            className="h-8 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+            style={{ filter: "brightness(0) invert(1)" }}
+            priority
+          />
         </Link>
 
         {/* Desktop Nav Links */}
@@ -136,7 +143,7 @@ export default function Header() {
                   variants={megaMenuVariants}
                   className="absolute left-1/2 top-full -translate-x-1/2 w-[900px] perspective-1000 origin-top pt-4"
                 >
-                  <div className="grid grid-cols-3 gap-6 rounded-2xl glassmorphism-card p-6 shadow-2xl overflow-hidden">
+                  <div className="grid grid-cols-3 gap-6 rounded-2xl bg-brand-dark/95 backdrop-blur-xl border border-white/10 p-6 shadow-2xl overflow-hidden">
                     {Object.entries(servicesList).map(([key, service]) => {
                       const ServiceIcon = service.icon;
                       return (

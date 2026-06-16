@@ -89,5 +89,59 @@
       "message": "hi i am haseeb"
     },
     "type": "contact_form"
+  },
+  {
+    "id": "js413af",
+    "submittedAt": "2026-06-14T17:23:00.040Z",
+    "answers": {
+      "painPoint": "Manual data entry",
+      "hoursAdmin": "20-40",
+      "annualRevenue": "<$500k",
+      "services": [
+        "AI Automation"
+      ],
+      "budgetTimeline": "Within 1 - 3 months",
+      "firstName": "Haseeb",
+      "lastName": "Arshed",
+      "email": "haseebarshed763@gmail.com",
+      "company": "Eidi",
+      "phone": "03333770130",
+      "strategyCall": true
+    },
+    "results": {
+      "score": 90,
+      "hoursSavedPerWeek": 24,
+      "yearlyHoursSaved": 1248,
+      "yearlySavings": 43680,
+      "monthlySavings": 3640,
+      "suggestedPackage": "Enterprise Custom Automation (Custom)"
+    }
+  },
+  {
+    "id": "2s4o4nt",
+    "submittedAt": "2026-06-14T19:21:20.376Z",
+    "answers": {
+      "painPoint": "Manual data entry",
+      "hoursAdmin": "20-40",
+      "annualRevenue": "<$500k",
+      "services": [
+        "AI Automation"
+      ],
+      "budgetTimeline": "Within 1 - 3 months",
+      "firstName": "Haseeb",
+      "lastName": "Arshed",
+      "email": "haseebarshed763@gmail.com",
+      "company": "Eidi",
+      "phone": "03333770130",
+      "strategyCall": true
+    },
+    "results": {
+      "score": 90,
+      "hoursSavedPerWeek": 24,
+      "yearlyHoursSaved": 1248,
+      "yearlySavings": 43680,
+      "monthlySavings": 3640,
+      "suggestedPackage": "Enterprise Custom Automation (Custom)"
+    }
   }
 ]

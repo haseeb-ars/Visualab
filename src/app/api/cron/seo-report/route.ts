@@ -105,6 +105,34 @@ export async function GET(request: Request) {
     console.log(`Summary: Impressions ${reportData.impressions}, Clicks ${reportData.clicks}, conversions ${reportData.dailyConversions}`);
     console.log("==========================================================");
 
+    // Dispatch email via Resend API
+    const senderEmail = process.env.SENDER_EMAIL || "onboarding@resend.dev";
+    const apiKey = process.env.RESEND_API_KEY || "re_Rjo728ix_6uS5bhkiFxNLdaUkX7UKBJbL";
+    try {
+      const response = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: `VisuaLab SEO <${senderEmail}>`,
+          to: adminEmail,
+          subject: emailSubject,
+          html: emailHtml,
+        }),
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error("[RESEND CRON ERROR]", errorData);
+      } else {
+        console.log(`[RESEND CRON SUCCESS] Sent daily SEO report to: ${adminEmail}`);
+      }
+    } catch (err) {
+      console.error("[RESEND CRON FETCH EXCEPTION]", err);
+    }
+
     return NextResponse.json({
       success: true,
       message: "Daily SEO report compiled and dispatched",

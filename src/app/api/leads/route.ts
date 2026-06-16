@@ -58,9 +58,34 @@ async function sendNotificationEmail(leadData: any) {
   console.log(`Body outline: ${htmlContent.replace(/<[^>]*>/g, " ").substring(0, 250)}...`);
   console.log("==========================================================");
 
-  // In production, you would run:
-  // const resend = new Resend('re_apiKey');
-  // await resend.emails.send({ from: 'leads@visualab.uk', to: adminEmail, subject, html: htmlContent });
+  // Dispatch email via Resend API
+  const senderEmail = process.env.SENDER_EMAIL || "onboarding@resend.dev";
+  const apiKey = process.env.RESEND_API_KEY || "re_Rjo728ix_6uS5bhkiFxNLdaUkX7UKBJbL";
+  try {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: `VisuaLab Leads <${senderEmail}>`,
+        to: adminEmail,
+        subject: subject,
+        html: htmlContent,
+      }),
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error("[RESEND ERROR]", errorData);
+    } else {
+      console.log(`[RESEND SUCCESS] Sent notification email to: ${adminEmail}`);
+    }
+  } catch (err) {
+    console.error("[RESEND FETCH EXCEPTION]", err);
+  }
+
   return true;
 }
 

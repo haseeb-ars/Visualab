@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import { useApp } from "@/context/AppContext";
 import confetti from "canvas-confetti";
 import { 
@@ -83,7 +84,22 @@ export default function ThankYou() {
           </div>
         )}
 
-        {/* INTERACTIVE CALENDAR SCHEDULER MOCKUP */}
+        {/* Cal.com Script Embed */}
+        <Script
+          id="cal-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.eu/embed/embed.js", "init");
+              Cal("init", "15min", {origin:"https://app.cal.eu"});
+              Cal.config = Cal.config || {};
+              Cal.config.forwardQueryParams = true;
+              Cal.ns["15min"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+            `
+          }}
+        />
+
+        {/* REAL CAL.COM SCHEDULER TRIGGER */}
         <div className="w-full max-w-lg rounded-3xl border border-white/10 bg-brand-dark/40 p-6 md:p-8 shadow-2xl relative text-left mt-6">
           <div className="absolute top-4 right-4 text-[9px] font-extrabold text-brand-amber uppercase bg-brand-amber/10 px-2.5 py-1 rounded border border-brand-amber/20">
             STRATEGY SESSION
@@ -93,76 +109,19 @@ export default function ThankYou() {
             <Calendar className="h-5 w-5 text-brand-blue" />
             Schedule Your 15-Min Briefing
           </h3>
-          <p className="text-[12px] text-zinc-500 font-normal leading-relaxed mb-6">
-            Secure a direct screen share session with our head engineer to map your API endpoints.
+          <p className="text-[13px] text-zinc-400 font-normal leading-relaxed mb-6">
+            Secure a direct screen share session with our head engineer to map your API endpoints and outline a custom automation roadmap.
           </p>
 
-          {!bookingConfirmed ? (
-            <div className="flex flex-col gap-5">
-              
-              {/* Date Select */}
-              <div className="flex flex-col gap-2">
-                <span className="text-[11px] font-bold text-zinc-400 uppercase">Select Date:</span>
-                <div className="grid grid-cols-3 gap-2">
-                  {dates.map((date) => (
-                    <button
-                      key={date.val}
-                      onClick={() => setSelectedDate(date.val)}
-                      className={`h-11 rounded-xl font-semibold text-[12px] border transition-all cursor-pointer ${
-                        selectedDate === date.val 
-                          ? "bg-brand-blue/15 border-brand-blue text-white" 
-                          : "border-white/5 bg-white/5 text-zinc-400 hover:border-white/20"
-                      }`}
-                    >
-                      {date.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Time Select */}
-              <div className="flex flex-col gap-2">
-                <span className="text-[11px] font-bold text-zinc-400 uppercase">Select Time:</span>
-                <div className="grid grid-cols-4 gap-2">
-                  {times.map((time) => (
-                    <button
-                      key={time}
-                      onClick={() => setSelectedTime(time)}
-                      className={`h-10 rounded-xl font-semibold text-[11px] border transition-all cursor-pointer ${
-                        selectedTime === time 
-                          ? "bg-brand-blue/15 border-brand-blue text-white" 
-                          : "border-white/5 bg-white/5 text-zinc-400 hover:border-white/20"
-                      }`}
-                    >
-                      {time}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <button
-                disabled={!selectedDate || !selectedTime}
-                onClick={handleBooking}
-                className={`h-12 w-full mt-2 rounded-xl font-bold text-[13px] flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                  selectedDate && selectedTime 
-                    ? "bg-brand-blue hover:bg-brand-blue/80 text-white shadow-lg" 
-                    : "bg-white/5 border border-white/10 text-zinc-600 cursor-not-allowed"
-                }`}
-              >
-                Confirm Briefing Call
-                <ArrowRight className="h-4 w-4" />
-              </button>
-
-            </div>
-          ) : (
-            <div className="p-4 rounded-2xl bg-brand-teal/5 border border-brand-teal/20 text-center flex flex-col items-center gap-3">
-              <CheckCircle className="h-6 w-6 text-brand-teal" />
-              <h4 className="text-base font-bold text-white">Booking Confirmed!</h4>
-              <p className="text-[12px] text-zinc-400">
-                You are scheduled for <strong>{selectedTime}</strong> on <strong>{selectedDate}</strong>. A Google Meet invite has been dispatched to your email.
-              </p>
-            </div>
-          )}
+          <button
+            data-cal-link="visualab/15min"
+            data-cal-namespace="15min"
+            data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+            className="h-12 w-full rounded-xl font-bold text-[13px] bg-brand-blue hover:bg-brand-blue/80 text-white shadow-lg flex items-center justify-center gap-2 transition-all cursor-pointer"
+          >
+            Schedule Strategy Call
+            <ArrowRight className="h-4 w-4" />
+          </button>
         </div>
 
         {/* WHILE YOU WAIT RESOURCE SUGGESTIONS */}

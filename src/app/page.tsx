@@ -125,7 +125,7 @@ export default function Home() {
             variants={itemVariants}
             className="lg:col-span-5 flex justify-center"
           >
-            <div className="relative w-full max-w-md h-[400px] rounded-3xl border border-white/5 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-md shadow-2xl overflow-hidden flex items-center justify-center group hover:border-brand-amber/20 transition-colors">
+            <div className="relative w-full max-w-md h-[380px] md:h-[450px] rounded-3xl border border-white/5 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-md shadow-2xl overflow-hidden flex items-center justify-center group hover:border-brand-amber/20 transition-colors">
               <div className="absolute top-4 left-4 text-[11px] font-bold tracking-wider text-zinc-500 uppercase">
                 Interactive AI Core
               </div>

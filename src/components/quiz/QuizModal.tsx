@@ -631,7 +631,7 @@ export default function QuizModal() {
                   </button>
 
                   <a
-                    href="https://calendly.com"
+                    href="https://cal.eu/visualab/15min"
                     target="_blank"
                     rel="noreferrer"
                     className="h-12 rounded-xl font-bold bg-brand-amber hover:bg-brand-amber/80 text-brand-navy flex items-center justify-center gap-2 transition-colors"

@@ -40,44 +40,40 @@ export default function ShopifyDevelopment() {
 
   const caseStudies = [
     {
-      store: "Aura Home Decor",
-      before: "3.8s Load Speed | 1.4% Conv",
-      after: "1.1s Load Speed | 3.2% Conv",
-      solution: "Engineered a custom Liquid theme, optimized media assets, and automated stock feeds.",
-      rev: "+125% Revenue Increase",
-      tech: "Shopify Liquid, Tailwind, Algolia"
+      store: "Carrera World",
+      before: "Legacy Eyewear Portal",
+      after: "Sleek, fashion-forward showcase",
+      solution: "A bold and stylish digital showcase capturing the energy of Carrera's iconic sunglasses line. Highlights their legacy in eyewear innovation with a sleek, fashion-forward presentation.",
+      rev: "Eyewear Brand Innovation",
+      tech: "Shopify Custom Liquid, Tailwind CSS, InstantSearch",
+      url: "https://en.carreraworld.com/"
     },
     {
-      store: "Nexus Activewear",
-      before: "Flash sales crashed checkout",
-      after: "0% downtime during $100k drop",
-      solution: "Migrated to Shopify Plus, set up custom queue filters, and optimized checkout API calls.",
-      rev: "$450k Launch Weekend",
-      tech: "Shopify Plus, Node.js, Redis"
+      store: "Gravity",
+      before: "Standard Drinks Store",
+      after: "Crisp & vibrant web experience",
+      solution: "A custom Shopify store designed for Gravity, makers of refreshing alcoholic seltzers. Blends vibrant visuals with clean design to reflect the brand's bold, refreshing character and youthful appeal.",
+      rev: "High-Engagement UX",
+      tech: "Shopify Theme Dev, Custom Assets, Speed Optimization",
+      url: "https://drinkgravity.com.au/"
     },
     {
-      store: "Velo Nutrition",
-      before: "High churn on recharge flow",
-      after: "-30% churn on subscriptions",
-      solution: "Redesigned checkout subscription widgets and automated Recharge reminders.",
-      rev: "+40% LTV Growth",
-      tech: "Recharge API, React, Klaviyo"
+      store: "Love Good Fats",
+      before: "Nutrition Storefront",
+      after: "Indulgent & friendly portal",
+      solution: "A warm, inviting digital space for Love Good Fats protein bars. The design emphasizes clean nutrition, feel-good energy, and a customer flow that is friendly and empowering.",
+      rev: "+85% Subscription LTV",
+      tech: "Shopify Plus, Recharge Subscriptions, Klaviyo",
+      url: "https://lovegoodfats.com/"
     },
     {
-      store: "Moda Footwear",
-      before: "WooCommerce inventory lag",
-      after: "Real-time automated stock sync",
-      solution: "Engineered a custom middleware API to link Shopify inventory with warehouse ERP.",
-      rev: "Saved 25 Hours/Week",
-      tech: "Shopify API, Node.js, Postgres"
-    },
-    {
-      store: "Glow Cosmetics",
-      before: "High cart abandonment",
-      after: "-20% abandoned carts",
-      solution: "Implemented one-click checkout, interactive cart upsells, and SMS automation.",
-      rev: "+15% Cart Reclaims",
-      tech: "Shopify Checkout, Attentive SMS"
+      store: "Tormino",
+      before: "Multi-Category Retail Store",
+      after: "Modern, fast e-commerce platform",
+      solution: "A high-performance custom Shopify storefront for Tormino, optimized for conversions, speed, and seamless navigation across a diverse catalog of bicycle parts, outdoor gear, and toys.",
+      rev: "Dynamic Catalog Integration",
+      tech: "Shopify Theme Development, Custom Metafields, Algolia Search",
+      url: "https://www.tormino.com"
     }
   ];
 
@@ -212,13 +208,23 @@ export default function ShopifyDevelopment() {
                 <span className="text-[11px] font-extrabold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 w-fit">
                   {study.store}
                 </span>
-                <h3 className="text-lg font-bold text-white mt-2">Before: {study.before}</h3>
+                <h3 className="text-lg font-bold text-white mt-2">{study.after}</h3>
                 <p className="text-[13px] text-zinc-400 font-normal leading-relaxed">{study.solution}</p>
                 <span className="text-[11px] font-bold text-zinc-500 mt-1 uppercase">Tech Stack: {study.tech}</span>
+                {study.url && (
+                  <a 
+                    href={study.url} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="text-[12px] font-semibold text-brand-blue hover:text-brand-blue/80 transition-colors flex items-center gap-1 mt-3 w-fit"
+                  >
+                    View Live Site <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                )}
               </div>
               <div className="text-center md:text-right shrink-0">
                 <div className="text-xl font-extrabold text-white group-hover:text-emerald-400 transition-colors">
-                  {study.after}
+                  {study.before}
                 </div>
                 <div className="text-[15px] font-extrabold text-brand-amber mt-1 flex items-center gap-1.5 md:justify-end">
                   <TrendingUp className="h-4.5 w-4.5" /> {study.rev}

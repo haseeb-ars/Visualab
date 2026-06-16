@@ -199,7 +199,7 @@ export default function HeroAvatar() {
   return (
     <div
       ref={containerRef}
-      className="h-[350px] md:h-[450px] w-full cursor-pointer relative"
+      className="h-full w-full cursor-pointer relative"
       title="Click to start assessment"
     >
       <div className="absolute inset-x-0 bottom-0 text-center pointer-events-none pb-4">

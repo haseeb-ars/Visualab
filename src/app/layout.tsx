@@ -8,6 +8,7 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import ThreeBackground from "@/components/ui/ThreeBackground";
 import QuizModal from "@/components/quiz/QuizModal";
 import AIChatbot from "@/components/chat/AIChatbot";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,12 +44,26 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-KRMXGGM64Q";
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-brand-navy text-foreground selection:bg-brand-amber/30 selection:text-white">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gaId}');
+          `}
+        </Script>
         <AppProvider>
           {/* Global Interactive Canvas Particles */}
           <ThreeBackground />
