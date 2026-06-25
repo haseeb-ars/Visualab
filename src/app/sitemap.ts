@@ -1,4 +1,6 @@
 import { MetadataRoute } from "next";
+import fs from "fs";
+import path from "path";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://visualab.uk";
@@ -24,14 +26,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Dynamic blog articles mapping
-  const blogSlugs = [
-    "process-automation-guide",
-    "shopify-vitals-optimization",
-    "high-converting-saas-landing-pages",
-    "llm-agents-customer-support",
-    "liquid-vs-headless-shopify",
-    "why-corporate-sites-need-dark-mode"
-  ];
+  const blogDir = path.join(process.cwd(), "src/data/blog");
+  let blogSlugs: string[] = [];
+  if (fs.existsSync(blogDir)) {
+    try {
+      const filenames = fs.readdirSync(blogDir);
+      blogSlugs = filenames
+        .filter((fn) => fn.endsWith(".json"))
+        .map((fn) => fn.replace(".json", ""));
+    } catch (e) {
+      console.error("Failed to read blog directory in sitemap", e);
+    }
+  }
 
   const blogUrls = blogSlugs.map((slug) => ({
     url: `${baseUrl}/blog/${slug}`,

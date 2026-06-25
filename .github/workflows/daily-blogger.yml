@@ -28,18 +28,42 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node scripts/generate-blog.js
 
-      - name: Commit and Push new post
+      - name: Commit and Push New Post (Auto-Publish)
+        id: publish_blog
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # Stage the generated blog posts directory
-          git add src/data/blog/
+          # Detect new json files created in src/data/blog/
+          NEW_BLOG_FILE=$(git status --porcelain | grep 'src/data/blog/' | grep '\.json' | awk '{print $2}')
           
-          # Commit and push if there are changes
-          if git diff-index --quiet HEAD; then
-            echo "No new blog generated today (or no changes detected)."
-          else
-            git commit -m "chore: automatically generate daily AI blog post [skip ci]"
+          if [ -n "$NEW_BLOG_FILE" ]; then
+            echo "New blog file detected: $NEW_BLOG_FILE"
+            
+            # Extract slug and title using Node.js
+            SLUG=$(node -e "console.log(require('./$NEW_BLOG_FILE').slug)")
+            TITLE=$(node -e "console.log(require('./$NEW_BLOG_FILE').title)")
+            
+            echo "SLUG=$SLUG" >> $GITHUB_ENV
+            echo "TITLE=$TITLE" >> $GITHUB_ENV
+            echo "NEW_BLOG_FOUND=true" >> $GITHUB_ENV
+            
+            git add "$NEW_BLOG_FILE"
+            git commit -m "chore: automatically generate and publish daily AI blog post [skip ci]"
             git push
+          else
+            echo "No new blog generated today."
+            echo "NEW_BLOG_FOUND=false" >> $GITHUB_ENV
+          fi
+
+      - name: Send Daily SEO Report
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+          RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
+        run: |
+          if [ "$NEW_BLOG_FOUND" = "true" ]; then
+            node scripts/send-seo-report.js --blog-title="$TITLE" --blog-slug="$SLUG"
+          else
+            node scripts/send-seo-report.js
           fi

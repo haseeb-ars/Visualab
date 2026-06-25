@@ -2,6 +2,17 @@ const fs = require("fs");
 const path = require("path");
 
 async function generateBlog() {
+  // 0. Skip generation if it's not the designated posting day (every 2 days)
+  const force = process.argv.includes("--force");
+  const daysSinceEpoch = Math.floor(Date.now() / (24 * 60 * 60 * 1000));
+  if (daysSinceEpoch % 2 !== 0 && !force) {
+    console.log("==========================================================");
+    console.log("[SKIP] Skipping blog generation today (posting interval: every 2 days).");
+    console.log("Use --force to run regardless of the 2-day schedule.");
+    console.log("==========================================================");
+    process.exit(0);
+  }
+
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     console.error("Error: GEMINI_API_KEY environment variable is not set.");
@@ -57,6 +68,13 @@ Specific Instructions:
 - The subheadings in contentHtml must match the Table of Contents (toc array) exactly.
 - Each subheading <h2> tag in the HTML must have an 'id' attribute matching its lowercase-hyphenated title (e.g. <h2 id="my-subheading-title" class="text-lg font-bold text-white mt-4">My Subheading Title</h2>).
 - Choose a realistic technical author name and matching role (e.g., Arthur Pendelton - Founder & Head of AI, Marcus Vance - Lead Shopify Developer, Clara Croft - UX/UI Design Director, or other engineers).
+
+Tone and Writing Style (CRITICAL for humanizing the text):
+- DO NOT use overused AI buzzwords or filler vocabulary (e.g., "delve", "testament", "revolutionize", "pave the way", "look no further", "rapidly evolving landscape", "crucial", "essential", "in summary", "moreover", "tapestry", "demystify").
+- Write with a natural, punchy, conversational, and direct developer-to-developer tone. Speak from first-hand technical experience.
+- Use active voice, short paragraphs (2-3 sentences max), and bold text naturally for key concepts to improve scannability.
+- Incorporate specific technical details, real-world development friction points, and concrete configurations or numbers rather than vague generalizations.
+- Ensure the introduction goes straight to the point (no fluffy build-up).
 
 Generate the blog article strictly adhering to the JSON schema format:
 {
