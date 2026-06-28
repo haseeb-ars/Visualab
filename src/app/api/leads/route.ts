@@ -7,7 +7,7 @@ const dbPath = path.join(dbDirectory, "leads.json");
 
 // Simulated Transactional Mailer (e.g., Resend or SendGrid integration)
 async function sendNotificationEmail(leadData: any) {
-  const adminEmail = "info@visualab.uk";
+  const adminEmail = process.env.RECEIVER_EMAIL || "info@visualab.uk";
   const { type, answers, results } = leadData;
   
   const subject = type === "contact_form" 
@@ -59,7 +59,7 @@ async function sendNotificationEmail(leadData: any) {
   console.log("==========================================================");
 
   // Dispatch email via Resend API
-  const senderEmail = process.env.SENDER_EMAIL || "onboarding@resend.dev";
+  const senderEmail = process.env.SENDER_EMAIL || "seo@visualab.uk";
   const apiKey = process.env.RESEND_API_KEY || "re_Rjo728ix_6uS5bhkiFxNLdaUkX7UKBJbL";
   try {
     const response = await fetch("https://api.resend.com/emails", {

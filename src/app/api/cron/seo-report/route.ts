@@ -6,7 +6,7 @@ const dbPath = path.join(process.cwd(), "src/data/leads.json");
 
 export async function GET(request: Request) {
   try {
-    const adminEmail = "info@visualab.uk";
+    const adminEmail = process.env.RECEIVER_EMAIL || "info@visualab.uk";
     
     // 1. Fetch lead conversion count for the day
     let dailyLeadsCount = 0;
@@ -106,7 +106,7 @@ export async function GET(request: Request) {
     console.log("==========================================================");
 
     // Dispatch email via Resend API
-    const senderEmail = process.env.SENDER_EMAIL || "onboarding@resend.dev";
+    const senderEmail = process.env.SENDER_EMAIL || "seo@visualab.uk";
     const apiKey = process.env.RESEND_API_KEY || "re_Rjo728ix_6uS5bhkiFxNLdaUkX7UKBJbL";
     try {
       const response = await fetch("https://api.resend.com/emails", {

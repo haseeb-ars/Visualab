@@ -31,7 +31,7 @@ if (fs.existsSync(envPath)) {
 }
 
 const apiKey = process.env.RESEND_API_KEY;
-const senderEmail = process.env.SENDER_EMAIL || "onboarding@resend.dev";
+const senderEmail = process.env.SENDER_EMAIL || "seo@visualab.uk";
 const receiverEmail = process.env.RECEIVER_EMAIL || "info@visualab.uk";
 
 if (!apiKey) {
