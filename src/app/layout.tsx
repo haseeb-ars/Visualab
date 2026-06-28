@@ -9,6 +9,7 @@ import ThreeBackground from "@/components/ui/ThreeBackground";
 import QuizModal from "@/components/quiz/QuizModal";
 import AIChatbot from "@/components/chat/AIChatbot";
 import Script from "next/script";
+import { Analytics } from '@vercel/analytics/next';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -88,6 +89,7 @@ export default function RootLayout({
           {/* Active AI Chatbot overlay */}
           <AIChatbot />
         </AppProvider>
+        <Analytics />
       </body>
     </html>
   );
