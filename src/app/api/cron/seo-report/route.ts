@@ -167,7 +167,7 @@ export async function GET(request: Request) {
 
     // Dispatch email via Resend API
     const senderEmail = process.env.SENDER_EMAIL || "seo@visualab.uk";
-    const apiKey = process.env.RESEND_API_KEY || "re_Rjo728ix_6uS5bhkiFxNLdaUkX7UKBJbL";
+    const apiKey = process.env.RESEND_API_KEY || "";
     try {
       const response = await fetch("https://api.resend.com/emails", {
         method: "POST",
