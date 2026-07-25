@@ -100,22 +100,6 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     
-    // Ensure the src/data directory exists
-    if (!fs.existsSync(dbDirectory)) {
-      fs.mkdirSync(dbDirectory, { recursive: true });
-    }
-
-    // Read existing database leads
-    let leads = [];
-    if (fs.existsSync(dbPath)) {
-      try {
-        const fileContent = fs.readFileSync(dbPath, "utf8");
-        leads = JSON.parse(fileContent);
-      } catch (e) {
-        console.error("Failed to parse existing leads file, resetting DB", e);
-      }
-    }
-
     // Create a new lead record
     const newLead = {
       id: Math.random().toString(36).substring(2, 9),
@@ -123,18 +107,35 @@ export async function POST(request: Request) {
       ...body
     };
 
-    leads.push(newLead);
+    // 1. Send notification email via Resend (Primary Action)
+    const emailSent = await sendNotificationEmail(newLead);
 
-    // Write back to the leads database
-    fs.writeFileSync(dbPath, JSON.stringify(leads, null, 2), "utf8");
+    // 2. Safely attempt local disk storage (Works on Localhost; caught on Vercel read-only system)
+    try {
+      if (!fs.existsSync(dbDirectory)) {
+        fs.mkdirSync(dbDirectory, { recursive: true });
+      }
 
-    // Forward lead notification email to admin owner
-    await sendNotificationEmail(newLead);
+      let leads = [];
+      if (fs.existsSync(dbPath)) {
+        try {
+          const fileContent = fs.readFileSync(dbPath, "utf8");
+          leads = JSON.parse(fileContent);
+        } catch (e) {
+          console.error("Failed to parse existing leads file", e);
+        }
+      }
+      leads.push(newLead);
+      fs.writeFileSync(dbPath, JSON.stringify(leads, null, 2), "utf8");
+    } catch (fsErr) {
+      console.warn("[STORAGE WARNING] Serverless read-only filesystem, skipping local disk write:", fsErr);
+    }
 
     return NextResponse.json({ 
       success: true, 
-      message: "Lead stored and notification sent",
-      leadId: newLead.id 
+      message: "Lead processed successfully",
+      leadId: newLead.id,
+      emailSent
     });
 
   } catch (error) {

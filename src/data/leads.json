@@ -196,5 +196,36 @@
         "Custom Liquid Theme"
       ]
     }
+  },
+  {
+    "id": "t786lxb",
+    "submittedAt": "2026-07-25T14:32:44.998Z",
+    "service": "shopify",
+    "answers": {
+      "service": "shopify",
+      "projectType": "Store Redesign & Migration",
+      "scaleOrRevenue": "<$10k",
+      "techRequirements": [
+        "Custom Liquid Theme"
+      ],
+      "platformPreference": "",
+      "primaryGoal": "",
+      "painPoint": "Manual data entry",
+      "tools": [],
+      "teamSize": "",
+      "budgetTimeline": "Within 1 – 2 months",
+      "firstName": "haseeb",
+      "lastName": "arshed",
+      "email": "haseebarshed2@gmail.com",
+      "company": "edid",
+      "phone": "0219-4830240239",
+      "notes": "",
+      "strategyCall": false,
+      "hoursAdmin": "10-20",
+      "annualRevenue": "$500k-2m",
+      "services": [
+        "Website Design"
+      ]
+    }
   }
 ]
