@@ -133,10 +133,10 @@ export default function ShopifyDevelopment() {
             </p>
 
             <button
-              onClick={openQuiz}
+              onClick={() => openQuiz("shopify")}
               className="h-14 px-8 mt-2 mx-auto lg:mx-0 w-fit rounded-full text-base font-bold text-white shimmer-btn flex items-center gap-2 shadow-[0_0_20px_rgba(157,78,221,0.3)] hover:scale-105 transition-all cursor-pointer"
             >
-              Schedule Shopify Consultation
+              Get Shopify Quote
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>
@@ -296,10 +296,10 @@ export default function ShopifyDevelopment() {
             High-volume storefronts require bespoke app integrations, custom checkout parameters, and warehouse ERP syncs. Complete our scoping assessment to receive a personalized quote.
           </p>
           <button
-            onClick={openQuiz}
+            onClick={() => openQuiz("shopify")}
             className="h-14 px-8 mt-2 rounded-full text-base font-bold text-white shimmer-btn flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(217,119,6,0.3)] hover:scale-105 transition-all"
           >
-            Start Shopify Scoping Quiz
+            Get Shopify Quote
             <ArrowRight className="h-5 w-5" />
           </button>
         </div>

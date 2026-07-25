@@ -288,10 +288,10 @@ export default function CaseStudies() {
             Take our operations assessment to get a custom roadmap detailing target ROI metrics.
           </p>
           <button
-            onClick={openQuiz}
+            onClick={() => openQuiz()}
             className="h-14 px-8 rounded-full text-base font-bold text-white shimmer-btn flex items-center gap-2 cursor-pointer"
           >
-            Start Operations Assessment
+            Get a Custom Quote
             <CheckCircle className="h-4.5 w-4.5" />
           </button>
         </div>

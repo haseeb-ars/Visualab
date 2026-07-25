@@ -143,5 +143,58 @@
       "monthlySavings": 3640,
       "suggestedPackage": "Enterprise Custom Automation (Custom)"
     }
+  },
+  {
+    "id": "scbg4mn",
+    "submittedAt": "2026-07-25T13:56:15.295Z",
+    "answers": {
+      "painPoint": "Manual data entry",
+      "hoursAdmin": "10-20",
+      "annualRevenue": "$500k-2m",
+      "services": [
+        "Website Design"
+      ],
+      "budgetTimeline": "Within 1 - 3 months",
+      "firstName": "haseeb",
+      "lastName": "arshed",
+      "email": "haseebarshed2@gmail.com",
+      "company": "edid",
+      "phone": "0219-4830240239",
+      "strategyCall": false
+    },
+    "results": {
+      "score": 85,
+      "hoursSavedPerWeek": 12,
+      "yearlyHoursSaved": 624,
+      "yearlySavings": 28080,
+      "monthlySavings": 2340,
+      "suggestedPackage": "Professional AI Subscription ($999/mo)"
+    }
+  },
+  {
+    "id": "sqzm8yi",
+    "submittedAt": "2026-07-25T14:06:58.492Z",
+    "service": "shopify",
+    "answers": {
+      "painPoint": "Manual data entry",
+      "hoursAdmin": "10-20",
+      "annualRevenue": "$500k-2m",
+      "services": [
+        "Website Design"
+      ],
+      "budgetTimeline": "Urgent / Ready to start immediately",
+      "firstName": "haseeb",
+      "lastName": "arshed",
+      "email": "haseebarshed2@gmail.com",
+      "company": "edid",
+      "phone": "0219-4830240239",
+      "strategyCall": false,
+      "service": "shopify",
+      "projectType": "New Custom Store Build",
+      "scaleOrRevenue": "<$10k",
+      "techRequirements": [
+        "Custom Liquid Theme"
+      ]
+    }
   }
 ]

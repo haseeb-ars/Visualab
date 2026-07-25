@@ -2,32 +2,39 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
+export type QuizAnswersType = typeof defaultAnswers;
+
 interface AppContextProps {
   isQuizOpen: boolean;
-  openQuiz: () => void;
+  selectedService: string | null;
+  openQuiz: (serviceId?: string) => void;
   closeQuiz: () => void;
   isChatbotOpen: boolean;
   openChatbot: () => void;
   closeChatbot: () => void;
   toggleChatbot: () => void;
-  quizAnswers: any;
-  updateQuizAnswers: (key: string, value: any) => void;
+  quizAnswers: QuizAnswersType;
+  updateQuizAnswers: (key: string, value: unknown) => void;
   resetQuizAnswers: () => void;
-  quizResults: any;
-  setQuizResults: (results: any) => void;
 }
 
 const defaultAnswers = {
+  service: "",
+  projectType: "",
+  scaleOrRevenue: "",
+  techRequirements: [] as string[],
+  platformPreference: "",
+  primaryGoal: "",
   painPoint: "",
-  hoursAdmin: "",
-  annualRevenue: "",
-  services: [] as string[],
+  tools: [] as string[],
+  teamSize: "",
   budgetTimeline: "",
   firstName: "",
   lastName: "",
   email: "",
   company: "",
   phone: "",
+  notes: "",
   strategyCall: false,
 };
 
@@ -35,39 +42,41 @@ const AppContext = createContext<AppContextProps | undefined>(undefined);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [isQuizOpen, setIsQuizOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<string | null>(null);
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
-  const [quizAnswers, setQuizAnswers] = useState(defaultAnswers);
-  const [quizResults, setQuizResultsState] = useState<any>(null);
+  const [quizAnswers, setQuizAnswers] = useState<QuizAnswersType>(defaultAnswers);
 
   // Load answers from localStorage on mount
   useEffect(() => {
     const savedAnswers = localStorage.getItem("visualab_quiz_answers");
     if (savedAnswers) {
       try {
-        setQuizAnswers(JSON.parse(savedAnswers));
+        const parsed = JSON.parse(savedAnswers);
+        // Hydrate saved answers inside effect callback
+        setQuizAnswers((prev) => ({ ...prev, ...parsed }));
       } catch (e) {
         console.error("Failed to parse saved quiz answers", e);
       }
     }
-
-    const savedResults = localStorage.getItem("visualab_quiz_results");
-    if (savedResults) {
-      try {
-        setQuizResultsState(JSON.parse(savedResults));
-      } catch (e) {
-        console.error("Failed to parse saved quiz results", e);
-      }
-    }
   }, []);
 
-  const openQuiz = () => setIsQuizOpen(true);
-  const closeQuiz = () => setIsQuizOpen(false);
+  const openQuiz = (serviceId?: string) => {
+    if (serviceId) {
+      setSelectedService(serviceId);
+      setQuizAnswers((prev) => ({ ...prev, service: serviceId }));
+    }
+    setIsQuizOpen(true);
+  };
+
+  const closeQuiz = () => {
+    setIsQuizOpen(false);
+  };
   
   const openChatbot = () => setIsChatbotOpen(true);
   const closeChatbot = () => setIsChatbotOpen(false);
   const toggleChatbot = () => setIsChatbotOpen((prev) => !prev);
 
-  const updateQuizAnswers = (key: string, value: any) => {
+  const updateQuizAnswers = (key: string, value: unknown) => {
     setQuizAnswers((prev) => {
       const updated = { ...prev, [key]: value };
       localStorage.setItem("visualab_quiz_answers", JSON.stringify(updated));
@@ -77,20 +86,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const resetQuizAnswers = () => {
     setQuizAnswers(defaultAnswers);
-    setQuizResultsState(null);
+    setSelectedService(null);
     localStorage.removeItem("visualab_quiz_answers");
     localStorage.removeItem("visualab_quiz_results");
-  };
-
-  const setQuizResults = (results: any) => {
-    setQuizResultsState(results);
-    localStorage.setItem("visualab_quiz_results", JSON.stringify(results));
   };
 
   return (
     <AppContext.Provider
       value={{
         isQuizOpen,
+        selectedService,
         openQuiz,
         closeQuiz,
         isChatbotOpen,
@@ -100,8 +105,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         quizAnswers,
         updateQuizAnswers,
         resetQuizAnswers,
-        quizResults,
-        setQuizResults,
       }}
     >
       {children}

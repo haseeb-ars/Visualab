@@ -19,9 +19,8 @@ export default function CustomCursor() {
     const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
     if (isTouchDevice) return;
 
-    setIsVisible(true);
-
     const moveCursor = (e: MouseEvent) => {
+      setIsVisible(true);
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
     };

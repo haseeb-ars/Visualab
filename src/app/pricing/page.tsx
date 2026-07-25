@@ -107,16 +107,16 @@ export default function Pricing() {
           <div className="absolute top-0 right-0 h-[200px] w-[200px] bg-brand-blue/10 blur-[85px] pointer-events-none" />
           
           <span className="text-[11px] font-extrabold text-brand-teal uppercase tracking-widest">Quote Inquiry Funnel</span>
-          <h2 className="text-3xl font-extrabold text-white">Ready for a Custom Operations Scoping Audit?</h2>
+          <h2 className="text-3xl font-extrabold text-white">Ready for a Custom Project Scoping Proposal?</h2>
           <p className="text-[14px] text-zinc-400 max-w-2xl font-normal leading-relaxed">
-            Take our 2-minute assessment quiz to catalog your manual data bottlenecks, team size, and integration requirements. We will compile a personalized audit report and issue a custom quote.
+            Complete our 2-minute service inquiry to specify your project requirements, tech stack, and timeline. Our team will review your details and issue a tailored scoping proposal.
           </p>
 
           <button
-            onClick={openQuiz}
+            onClick={() => openQuiz()}
             className="h-14 px-8 mt-2 rounded-full text-base font-bold text-white shimmer-btn flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(217,119,6,0.3)] hover:scale-105 transition-all"
           >
-            Start Operations Scoping Quiz
+            Start Project Inquiry
             <ArrowRight className="h-5 w-5" />
           </button>
         </div>

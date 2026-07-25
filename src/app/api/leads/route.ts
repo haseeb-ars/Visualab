@@ -8,46 +8,47 @@ const dbPath = path.join(dbDirectory, "leads.json");
 // Simulated Transactional Mailer (e.g., Resend or SendGrid integration)
 async function sendNotificationEmail(leadData: any) {
   const adminEmail = process.env.RECEIVER_EMAIL || "info@visualab.uk";
-  const { type, answers, results } = leadData;
+  const { type, answers, service } = leadData;
+  const leadAnswers = answers || {};
   
-  const subject = type === "contact_form" 
-    ? `New VisuaLab Client Inquiry: ${answers.fullName} (${answers.company})`
-    : `New VisuaLab Assessment Funnel: ${answers.company} (${results?.score}% Score)`;
+  const clientName = leadAnswers.fullName || `${leadAnswers.firstName || ""} ${leadAnswers.lastName || ""}`.trim() || "Prospect";
+  const company = leadAnswers.company || "Company";
+  const serviceName = service || leadAnswers.serviceInterest || leadAnswers.service || "General Inquiry";
+  
+  const subject = `New VisuaLab Lead Inquiry [${serviceName}]: ${clientName} (${company})`;
 
-  // Formatted HTML Email Body
   let htmlContent = "";
   if (type === "contact_form") {
     htmlContent = `
-      <h2>New Query Submission</h2>
-      <p><strong>Name:</strong> ${answers.fullName}</p>
-      <p><strong>Email:</strong> ${answers.email}</p>
-      <p><strong>Phone:</strong> ${answers.phone || "Not provided"}</p>
-      <p><strong>Company:</strong> ${answers.company}</p>
-      <p><strong>Service Interest:</strong> ${answers.serviceInterest}</p>
+      <h2>New Contact Form Inquiry</h2>
+      <p><strong>Name:</strong> ${leadAnswers.fullName}</p>
+      <p><strong>Email:</strong> ${leadAnswers.email}</p>
+      <p><strong>Phone:</strong> ${leadAnswers.phone || "Not provided"}</p>
+      <p><strong>Company:</strong> ${leadAnswers.company}</p>
+      <p><strong>Service Interest:</strong> ${leadAnswers.serviceInterest}</p>
       <p><strong>Message:</strong></p>
       <blockquote style="background:#f3f4f6; padding:15px; border-left:4px solid #0066ff;">
-        ${answers.message}
+        ${leadAnswers.message}
       </blockquote>
     `;
   } else {
     htmlContent = `
-      <h2>New Operations Assessment Funnel Entry</h2>
-      <p><strong>Contact:</strong> ${answers.firstName} ${answers.lastName}</p>
-      <p><strong>Email:</strong> ${answers.email}</p>
-      <p><strong>Phone:</strong> ${answers.phone || "Not provided"}</p>
-      <p><strong>Company:</strong> ${answers.company}</p>
+      <h2>New Service Lead Funnel Submission</h2>
+      <p><strong>Service Requested:</strong> ${serviceName}</p>
+      <p><strong>Contact Name:</strong> ${leadAnswers.firstName || ""} ${leadAnswers.lastName || ""}</p>
+      <p><strong>Email:</strong> ${leadAnswers.email}</p>
+      <p><strong>Phone:</strong> ${leadAnswers.phone || "Not provided"}</p>
+      <p><strong>Company:</strong> ${leadAnswers.company}</p>
+      <p><strong>Notes:</strong> ${leadAnswers.notes || "None"}</p>
       <br/>
       <div style="background:#090924; color:#fff; padding:20px; border-radius:12px; border:1px solid #1a1a3e;">
-        <h3 style="color:#0ea5e9; margin-top:0;">Audit Scorecard Results:</h3>
-        <p><strong>AI Readiness Rating:</strong> ${results.score}%</p>
-        <p><strong>Projected Savings:</strong> $${results.yearlySavings.toLocaleString()}/year</p>
-        <p><strong>Hours Reclaimed:</strong> ${results.yearlyHoursSaved} hours/year</p>
-        <p><strong>Recommended Tier:</strong> ${results.suggestedPackage}</p>
+        <h3 style="color:#0ea5e9; margin-top:0;">Questionnaire Responses:</h3>
+        <p><strong>Project Type / Pain Point:</strong> ${leadAnswers.projectType || leadAnswers.painPoint || "N/A"}</p>
+        <p><strong>Scale / Revenue / Team Size:</strong> ${leadAnswers.scaleOrRevenue || leadAnswers.teamSize || "N/A"}</p>
+        <p><strong>Platform / Goal / Tools:</strong> ${leadAnswers.platformPreference || leadAnswers.primaryGoal || (leadAnswers.tools ? leadAnswers.tools.join(", ") : "N/A")}</p>
+        <p><strong>Key Requirements:</strong> ${leadAnswers.techRequirements ? leadAnswers.techRequirements.join(", ") : "N/A"}</p>
+        <p><strong>Timeline:</strong> ${leadAnswers.budgetTimeline || "N/A"}</p>
       </div>
-      <br/>
-      <p><strong>Operational Pain Point:</strong> ${answers.painPoint}</p>
-      <p><strong>Current Admin Hours/Week:</strong> ${answers.hoursAdmin}</p>
-      <p><strong>Timeline Target:</strong> ${answers.budgetTimeline}</p>
     `;
   }
 

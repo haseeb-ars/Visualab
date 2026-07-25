@@ -88,10 +88,10 @@ export default function WebDesign() {
         </p>
 
         <button
-          onClick={openQuiz}
+          onClick={() => openQuiz("web")}
           className="h-14 px-8 mt-4 rounded-full text-base font-bold text-white shimmer-btn flex items-center gap-2 cursor-pointer"
         >
-          Get Free Assessment
+          Get Web Design Quote
           <ArrowRight className="h-4 w-4" />
         </button>
 
@@ -287,10 +287,10 @@ export default function WebDesign() {
             Every business requires custom web interfaces matching their transaction speeds, CRM systems, and brand guidelines. Complete our brief Operations Assessment to get a custom proposal.
           </p>
           <button
-            onClick={openQuiz}
+            onClick={() => openQuiz("web")}
             className="h-14 px-8 mt-2 rounded-full text-base font-bold text-white shimmer-btn flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(217,119,6,0.3)] hover:scale-105 transition-all"
           >
-            Start Web Scoping Quiz
+            Get Web Design Quote
             <ArrowRight className="h-5 w-5" />
           </button>
         </div>

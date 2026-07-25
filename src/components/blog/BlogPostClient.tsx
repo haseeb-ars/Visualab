@@ -129,10 +129,10 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
             Run a free system assessment to isolate data bottlenecks and qualify for deployment retainer support.
           </p>
           <button
-            onClick={openQuiz}
+            onClick={() => openQuiz()}
             className="h-12 px-6 rounded-full text-[13px] font-bold text-white shimmer-btn flex items-center gap-2 cursor-pointer"
           >
-            Start Operations Assessment
+            Get a Custom Quote
             <Zap className="h-4 w-4 fill-current text-white" />
           </button>
         </div>

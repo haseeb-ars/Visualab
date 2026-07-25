@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useApp } from "@/context/AppContext";
 import { 
   Sparkles, 
   Send, 
@@ -14,13 +15,13 @@ import {
 } from "lucide-react";
 
 export default function Footer() {
+  const { openQuiz } = useApp();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    // Simulate subscription
     setSubscribed(true);
     setEmail("");
     setTimeout(() => {
@@ -28,7 +29,13 @@ export default function Footer() {
     }, 5000);
   };
 
-  const footerLinks = {
+  interface FooterLink {
+    name: string;
+    href?: string;
+    action?: string;
+  }
+
+  const footerLinks: Record<string, { title: string; links: FooterLink[] }> = {
     services: {
       title: "Services",
       links: [
@@ -50,7 +57,7 @@ export default function Footer() {
     resources: {
       title: "Resources",
       links: [
-        { name: "Free Assessment Quiz", href: "#" },
+        { name: "Get a Custom Quote", action: "openQuiz" },
         { name: "ROI Savings Calculator", href: "/services/ai-automation#roi-calculator" },
         { name: "System Integration APIs", href: "/services/ai-automation#features" },
         { name: "Contact Support", href: "/contact" },
@@ -118,12 +125,21 @@ export default function Footer() {
               <ul className="flex flex-col gap-3">
                 {section.links.map((link, lIdx) => (
                   <li key={lIdx}>
-                    <Link 
-                      href={link.href}
-                      className="text-[14px] text-zinc-400 hover:text-white transition-colors"
-                    >
-                      {link.name}
-                    </Link>
+                    {link.action === "openQuiz" ? (
+                      <button
+                        onClick={() => openQuiz()}
+                        className="text-[14px] text-zinc-400 hover:text-white transition-colors cursor-pointer text-left"
+                      >
+                        {link.name}
+                      </button>
+                    ) : (
+                      <Link 
+                        href={link.href || "#"}
+                        className="text-[14px] text-zinc-400 hover:text-white transition-colors"
+                      >
+                        {link.name}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

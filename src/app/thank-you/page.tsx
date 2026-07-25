@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Script from "next/script";
-import { useApp } from "@/context/AppContext";
 import confetti from "canvas-confetti";
 import { 
   CheckCircle, 
@@ -17,7 +16,6 @@ import {
 } from "lucide-react";
 
 export default function ThankYou() {
-  const { quizResults } = useApp();
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
@@ -67,22 +65,8 @@ export default function ThankYou() {
         </h1>
         
         <p className="text-lg text-zinc-400 max-w-xl font-normal leading-relaxed">
-          Your request was posted. An engineer will audit your database systems and outline a draft roadmap.
+          Thank you for your inquiry. We've received your information and will review your requirements. A member of our team will be in touch shortly.
         </p>
-
-        {/* Dynamic score summary if they just finished the quiz */}
-        {quizResults && (
-          <div className="glassmorphism rounded-2xl p-6 border border-white/5 max-w-sm w-full flex items-center justify-between mt-2">
-            <div className="text-left">
-              <span className="text-[10px] font-bold text-zinc-500 uppercase">Operational Audit</span>
-              <h4 className="text-lg font-bold text-white mt-1">Readiness Card</h4>
-            </div>
-            <div className="text-right">
-              <span className="text-2xl font-extrabold text-brand-teal">{quizResults.score}%</span>
-              <p className="text-[11px] text-zinc-500 font-medium">Readiness Rating</p>
-            </div>
-          </div>
-        )}
 
         {/* Cal.com Script Embed */}
         <Script

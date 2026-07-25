@@ -88,8 +88,8 @@ export default function ShopifyCanvas() {
     scene.add(accentLight);
 
     // Mouse control
-    let mouse = new THREE.Vector2();
-    let target = new THREE.Vector2();
+    const mouse = new THREE.Vector2();
+    const target = new THREE.Vector2();
 
     const onMouseMove = (event: MouseEvent) => {
       const rect = renderer.domElement.getBoundingClientRect();

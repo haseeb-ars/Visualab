@@ -88,10 +88,10 @@ export default function Home() {
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-2"
             >
               <button
-                onClick={openQuiz}
+                onClick={() => openQuiz()}
                 className="h-14 px-8 rounded-full text-base font-bold text-white shimmer-btn flex items-center justify-center gap-2 cursor-pointer"
               >
-                Start Your Free AI Assessment
+                Get a Custom Project Quote
                 <Zap className="h-5 w-5 fill-current" />
               </button>
               
@@ -293,15 +293,15 @@ export default function Home() {
               Ready to Save 20+ Hours a Week?
             </h2>
             <p className="text-[15px] text-zinc-400 font-normal leading-relaxed">
-              Take our interactive assessment to see how much of your daily operations can be handled by AI. Receive a custom report with estimated ROI savings instantly.
+              Complete our 2-minute service inquiry to get a tailored proposal and schedule a direct consultation with our lead engineers.
             </p>
           </div>
 
           <button
-            onClick={openQuiz}
+            onClick={() => openQuiz()}
             className="px-8 py-4 rounded-full text-base font-bold text-white shimmer-btn shrink-0 flex items-center gap-2 shadow-[0_0_20px_rgba(157,78,221,0.3)] hover:scale-105 transition-all cursor-pointer"
           >
-            Start Operational Assessment
+            Get Your Custom Quote
             <Zap className="h-5 w-5 fill-current text-white" />
           </button>
 

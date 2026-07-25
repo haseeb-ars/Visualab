@@ -201,10 +201,10 @@ export default function Header() {
         {/* CTA Button / Mobile Toggle */}
         <div className="flex items-center gap-4">
           <button
-            onClick={openQuiz}
+            onClick={() => openQuiz()}
             className="hidden sm:inline-flex px-5 py-2.5 rounded-full text-[14px] font-semibold text-white shimmer-btn cursor-pointer"
           >
-            Start Free Assessment
+            Get a Custom Quote
           </button>
           
           <Link
@@ -309,7 +309,7 @@ export default function Header() {
                 }}
                 className="w-full py-3 rounded-full text-center font-bold text-white shimmer-btn text-[14px] cursor-pointer"
               >
-                Start Free Assessment
+                Get a Custom Quote
               </button>
 
             </div>

@@ -77,8 +77,8 @@ export default function ContactCanvas() {
     scene.add(pointLight);
 
     // Mouse coordinates
-    let mouse = new THREE.Vector2();
-    let target = new THREE.Vector2();
+    const mouse = new THREE.Vector2();
+    const target = new THREE.Vector2();
 
     const onMouseMove = (event: MouseEvent) => {
       const rect = renderer.domElement.getBoundingClientRect();

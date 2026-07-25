@@ -34,7 +34,7 @@ export default function AIChatbot() {
         "What is AI Automation?",
         "How much does a setup cost?",
         "Shopify development services",
-        "Take the Free Assessment"
+        "Get a Custom Quote"
       ]
     }
   ]);
@@ -69,26 +69,26 @@ export default function AIChatbot() {
 
     // Simulate AI response based on keywords
     setTimeout(() => {
-      let replyText = "I'm not sure about that specific system, but VisuaLab specializes in custom API integrations, automated lead scoring, and customer service chatbot deployments. Would you like to check your operations efficiency with our Assessment Quiz?";
-      let suggestions = ["Take the Assessment Quiz", "Tell me about Pricing", "Contact an Engineer"];
+      let replyText = "VisuaLab specializes in Shopify e-commerce, custom website design, and AI automation. Would you like to get a tailored quote for your project?";
+      let suggestions = ["Get a Custom Quote", "Tell me about Pricing", "Contact an Engineer"];
       
       const normalizedText = text.toLowerCase();
 
-      if (normalizedText.includes("assessment") || normalizedText.includes("quiz") || normalizedText.includes("audit")) {
-        replyText = "Our Free Assessment takes less than 2 minutes and generates a detailed Operations Efficiency score and savings calculator. Click below to launch it!";
-        suggestions = ["Launch Assessment Quiz", "Read Case Studies"];
+      if (normalizedText.includes("quote") || normalizedText.includes("quiz") || normalizedText.includes("inquiry") || normalizedText.includes("assessment")) {
+        replyText = "Our interactive project inquiry takes under 2 minutes and helps us scope your exact requirements. Click below to launch it!";
+        suggestions = ["Get a Custom Quote", "Read Case Studies"];
       } else if (normalizedText.includes("price") || normalizedText.includes("cost") || normalizedText.includes("subscription")) {
-        replyText = "We offer Subscription AI Automation plans starting from $499/mo (Starter) to $999/mo (Professional) and custom Enterprise setups. Custom Shopify stores start at $2,500. You can inspect all details on our Pricing page.";
-        suggestions = ["Go to Pricing Page", "Take the Quiz"];
+        replyText = "We offer custom scoping proposals for Shopify development, website design, and AI automation based on project requirements. You can inspect details on our Pricing page.";
+        suggestions = ["Go to Pricing Page", "Get a Custom Quote"];
       } else if (normalizedText.includes("shopify") || normalizedText.includes("ecom") || normalizedText.includes("store")) {
-        replyText = "We build custom Shopify themes, develop bespoke apps, optimize Core Web Vitals, and automate inventory syncing. We focus on scaling stores doing 7-8 figures.";
-        suggestions = ["Shopify Service Details", "See Case Studies"];
+        replyText = "We build custom Liquid themes, private app integrations, speed optimizations, and B2B/recurring subscription systems for scaling brands.";
+        suggestions = ["Shopify Service Details", "Get a Custom Quote"];
       } else if (normalizedText.includes("what is") && normalizedText.includes("automation")) {
         replyText = "AI Automation replaces repetitive admin tasks (e.g. data sorting, email responses, customer ticketing, lead scoring) with intelligent bots, saving your team 20+ hours per week.";
-        suggestions = ["See Use Cases", "Calculate ROI"];
+        suggestions = ["See Use Cases", "Get a Custom Quote"];
       } else if (normalizedText.includes("contact") || normalizedText.includes("call") || normalizedText.includes("email")) {
-        replyText = "You can schedule a strategy consult directly via Calendly after completing the operations quiz, email us at info@visualab.uk, or drop a query on our Contact page.";
-        suggestions = ["Go to Contact Page", "Take the Quiz"];
+        replyText = "You can schedule a strategy briefing directly after completing our project inquiry, email us at info@visualab.uk, or send a message on our Contact page.";
+        suggestions = ["Go to Contact Page", "Get a Custom Quote"];
       }
 
       const botMsg: Message = {
@@ -105,14 +105,14 @@ export default function AIChatbot() {
   };
 
   const handleSuggestionClick = (suggestion: string) => {
-    if (suggestion.includes("Assessment") || suggestion.includes("Quiz") || suggestion.includes("Launch")) {
+    if (suggestion.includes("Quote") || suggestion.includes("Assessment") || suggestion.includes("Quiz") || suggestion.includes("Launch")) {
       toggleChatbot();
       openQuiz();
     } else if (suggestion.includes("Pricing")) {
       window.location.href = "/pricing";
     } else if (suggestion.includes("Contact")) {
       window.location.href = "/contact";
-    } else if (suggestion.includes("Shopify")) {
+    } else if (suggestion.includes("Shopify Service")) {
       window.location.href = "/services/shopify-development";
     } else {
       handleSend(suggestion);

@@ -152,10 +152,10 @@ export default function AIAutomation() {
         </p>
 
         <button
-          onClick={openQuiz}
+          onClick={() => openQuiz("ai")}
           className="h-14 px-8 mt-4 rounded-full text-base font-bold text-white shimmer-btn flex items-center gap-2 cursor-pointer"
         >
-          Compute Operational Savings
+          Get AI Automation Quote
           <TrendingUp className="h-5 w-5" />
         </button>
       </section>
@@ -469,13 +469,13 @@ export default function AIAutomation() {
           <div className="absolute top-0 right-0 h-[200px] w-[200px] bg-brand-amber-glow blur-[80px] pointer-events-none" />
           <h2 className="text-3xl font-extrabold text-white">Get a Custom Integration Roadmap</h2>
           <p className="text-[15px] text-zinc-400 max-w-xl font-normal leading-relaxed">
-            Take our operations assessment to get details on savings targets, implementation times, and project scoping.
+            Complete our quick inquiry to receive a custom automation proposal and implementation roadmap.
           </p>
           <button
-            onClick={openQuiz}
+            onClick={() => openQuiz("ai")}
             className="h-14 px-8 rounded-full text-base font-bold text-white shimmer-btn flex items-center gap-2 cursor-pointer"
           >
-            Start Operations Assessment
+            Get AI Automation Quote
             <ArrowRight className="h-4 w-4" />
           </button>
         </div>
