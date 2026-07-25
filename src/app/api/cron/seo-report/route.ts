@@ -166,31 +166,33 @@ export async function GET(request: Request) {
     console.log("==========================================================");
 
     // Dispatch email via Resend API
-    const senderEmail = process.env.SENDER_EMAIL || "seo@visualab.uk";
+    const senderEmail = process.env.SENDER_EMAIL || "onboarding@resend.dev";
     const apiKey = process.env.RESEND_API_KEY || "";
-    try {
-      const response = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: `VisuaLab SEO <${senderEmail}>`,
-          to: adminEmail,
-          subject: emailSubject,
-          html: emailHtml,
-        }),
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        console.error("[RESEND CRON ERROR]", errorData);
-      } else {
-        console.log(`[RESEND CRON SUCCESS] Sent daily SEO report to: ${adminEmail}`);
+    if (apiKey) {
+      try {
+        const response = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: senderEmail.includes("<") ? senderEmail : `VisuaLab SEO <${senderEmail}>`,
+            to: adminEmail,
+            subject: emailSubject,
+            html: emailHtml,
+          }),
+        });
+        
+        const responseData = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          console.error("[RESEND ERROR Response]", responseData);
+        } else {
+          console.log(`[RESEND SUCCESS] Sent notification email to: ${adminEmail}`, responseData);
+        }
+      } catch (err) {
+        console.error("[RESEND FETCH EXCEPTION]", err);
       }
-    } catch (err) {
-      console.error("[RESEND CRON FETCH EXCEPTION]", err);
     }
 
     return NextResponse.json({

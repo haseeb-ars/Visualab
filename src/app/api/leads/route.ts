@@ -60,8 +60,14 @@ async function sendNotificationEmail(leadData: any) {
   console.log("==========================================================");
 
   // Dispatch email via Resend API
-  const senderEmail = process.env.SENDER_EMAIL || "seo@visualab.uk";
+  const senderEmail = process.env.SENDER_EMAIL || "onboarding@resend.dev";
   const apiKey = process.env.RESEND_API_KEY || "";
+
+  if (!apiKey) {
+    console.warn("[RESEND WARNING] RESEND_API_KEY environment variable is not defined in process.env.");
+    return false;
+  }
+
   try {
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -70,18 +76,18 @@ async function sendNotificationEmail(leadData: any) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: `VisuaLab Leads <${senderEmail}>`,
+        from: senderEmail.includes("<") ? senderEmail : `VisuaLab Leads <${senderEmail}>`,
         to: adminEmail,
         subject: subject,
         html: htmlContent,
       }),
     });
     
+    const responseData = await response.json().catch(() => ({}));
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      console.error("[RESEND ERROR]", errorData);
+      console.error("[RESEND ERROR Response]", responseData);
     } else {
-      console.log(`[RESEND SUCCESS] Sent notification email to: ${adminEmail}`);
+      console.log(`[RESEND SUCCESS] Sent notification email to: ${adminEmail}`, responseData);
     }
   } catch (err) {
     console.error("[RESEND FETCH EXCEPTION]", err);
